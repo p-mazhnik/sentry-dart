@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:sentry_dio/sentry_dio.dart';
 import 'package:sentry_drift/sentry_drift.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:sentry_flutter_example/multiview_app.dart';
 import 'package:sentry_hive/sentry_hive.dart';
 import 'package:sentry_isar/sentry_isar.dart';
 import 'package:sentry_logging/sentry_logging.dart';
@@ -44,11 +45,13 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   await setupSentry(
-    () => runApp(
+    () => runWidget(
       SentryWidget(
         child: DefaultAssetBundle(
           bundle: SentryAssetBundle(),
-          child: const MyApp(),
+          child: MultiViewApp(
+            viewBuilder: (BuildContext context) => const MyApp(),
+          ),
         ),
       ),
     ),
